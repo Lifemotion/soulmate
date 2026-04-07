@@ -128,7 +128,15 @@ body {
 .compare-label-normal { color: var(--text-tertiary); }
 .compare-label-soulmate { color: var(--accent); }
 .compare-text { font-size: 1rem; line-height: 1.8; font-weight: 300; color: var(--text-secondary); }
-.compare-text em { color: var(--text-tertiary); font-style: italic; }
+.compare-text em { color: var(--text-tertiary); font-style: italic; cursor: pointer; transition: color 0.2s; border-bottom: 1px dashed var(--text-tertiary); }
+.compare-text em:hover { color: var(--text-secondary); }
+.compare-expand {
+  display: none; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.7;
+  color: var(--text-secondary); white-space: pre-wrap; word-break: break-word;
+}
+.compare-expand.open { display: block; }
+.compare-col-soulmate .compare-expand { color: var(--diff-added-text); opacity: 0.8; }
 .compare-col-soulmate .compare-text { color: var(--diff-added-text); }
 .compare-prompt {
   margin-top: 4rem; margin-bottom: 1.5rem; padding: 12px 20px;
@@ -223,11 +231,65 @@ body {
   <div class="compare-grid">
     <div class="compare-col">
       <span class="compare-label compare-label-normal">Default &mdash; 989 tokens</span>
-      <div class="compare-text">The issue is likely a <strong>timestamp format mismatch</strong>. JWT <code>exp</code> claims use <strong>Unix timestamps in seconds</strong>, while <code>Date.now()</code> returns <strong>milliseconds</strong>. This means your expired tokens appear valid because you're comparing different time units.<br><br><em>...then 4 code blocks, 2 alternative approaches, a testing section, and a key takeaway paragraph.</em></div>
+      <div class="compare-text">The issue is likely a <strong>timestamp format mismatch</strong>. JWT <code>exp</code> claims use <strong>Unix timestamps in seconds</strong>, while <code>Date.now()</code> returns <strong>milliseconds</strong>. This means your expired tokens appear valid because you're comparing different time units.<br><br><em onclick="toggleExpand('expandNormal')">...then 4 code blocks, 2 alternative approaches, a testing section, and a key takeaway paragraph.</em></div>
+      <div class="compare-expand" id="expandNormal">## The Problem
+
+// ❌ WRONG - Comparing milliseconds to seconds
+const currentTime = Date.now();       // milliseconds
+const tokenExp = decoded.exp;          // seconds
+
+if (currentTime &lt; tokenExp) {
+  // Always true: 1700000000000 &lt; 1700000000
+}
+
+## The Fix
+
+// Option 1: Convert Date.now() to seconds
+const currentTimeInSeconds = Math.floor(Date.now() / 1000);
+if (currentTimeInSeconds &gt;= decoded.exp) {
+  return res.status(401).json({ error: 'Token expired' });
+}
+
+// Option 2: Convert exp to milliseconds
+const tokenExpInMs = decoded.exp * 1000;
+if (Date.now() &gt;= tokenExpInMs) {
+  return res.status(401).json({ error: 'Token expired' });
+}
+
+## Complete Auth Middleware Example
+## Better Approach: Let jwt.verify() Handle It
+## Testing Your Fix
+
+The key takeaway: Always ensure you're comparing
+timestamps in the same units.</div>
     </div>
     <div class="compare-col compare-col-soulmate">
       <span class="compare-label compare-label-soulmate">Soulmate &mdash; 668 tokens</span>
-      <div class="compare-text">Oh, this is a sneaky one that trips up so many developers! Here's what's happening: <strong>JWT expiry times are in seconds since Unix epoch, but <code>Date.now()</code> returns milliseconds</strong>. So you're comparing apples to oranges!<br><br>Think of it like this &mdash; your token says "I expire at second 1,700,000,000" but <code>Date.now()</code> is shouting "It's millisecond 1,700,000,000,000 right now!" Your middleware looks at those numbers and goes "Well, this token must be super fresh!"<br><br><em>...then the fix, a complete middleware example, and a pro tip &mdash; all in 32% fewer tokens.</em></div>
+      <div class="compare-text">Oh, this is a sneaky one that trips up so many developers! Here's what's happening: <strong>JWT expiry times are in seconds since Unix epoch, but <code>Date.now()</code> returns milliseconds</strong>. So you're comparing apples to oranges!<br><br>Think of it like this &mdash; your token says "I expire at second 1,700,000,000" but <code>Date.now()</code> is shouting "It's millisecond 1,700,000,000,000 right now!" Your middleware looks at those numbers and goes "Well, this token must be super fresh!"<br><br><em onclick="toggleExpand('expandSoulmate')">...then the fix, a complete middleware example, and a pro tip &mdash; all in 32% fewer tokens.</em></div>
+      <div class="compare-expand" id="expandSoulmate">## The Fix
+
+// ❌ Wrong - comparing milliseconds to seconds
+if (Date.now() &gt; payload.exp) { ... }
+
+// ✅ Right - both in seconds now
+if (Math.floor(Date.now() / 1000) &gt; payload.exp) { ... }
+
+## Complete Middleware Example
+
+const authenticateToken = (req, res, next) =&gt; {
+  const token = authHeader &amp;&amp; authHeader.split(' ')[1];
+  const payload = jwt.verify(token, process.env.JWT_SECRET);
+  const now = Math.floor(Date.now() / 1000);
+  if (now &gt; payload.exp) {
+    return res.status(401).json({ error: 'Token expired' });
+  }
+  req.user = payload;
+  next();
+};
+
+Pro tip: jwt.verify() checks expiry automatically,
+so you might not even need the manual check!
+Once you fix it, your auth will be rock solid! 🔒</div>
     </div>
   </div>
 </section>
@@ -308,6 +370,10 @@ const items = [
 const track = document.getElementById('marqueeTrack');
 const marqueeHTML = [...items, ...items, ...items].map(i => `<div class="marquee-item">${i.k}<span>${i.v}</span></div>`).join('');
 track.innerHTML = marqueeHTML;
+
+function toggleExpand(id) {
+  document.getElementById(id).classList.toggle('open');
+}
 
 function copyInstall(btn) {
   navigator.clipboard.writeText('npx skills add Lifemotion/soulmate');
