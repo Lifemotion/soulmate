@@ -1,8 +1,8 @@
 {
-  "name": "caveman",
-  "description": "Ultra-compressed communication mode. Cuts ~75% of tokens while keeping full technical accuracy by speaking like a caveman.",
+  "name": "soulmate",
+  "description": "Warm, human communication mode. Enriches responses with empathy, emotion, and personality while keeping full technical accuracy.",
   "author": {
-    "name": "Julius Brussee",
-    "url": "https://github.com/JuliusBrussee"
+    "name": "Lifemotion",
+    "url": "https://github.com/Lifemotion"
   }
 }

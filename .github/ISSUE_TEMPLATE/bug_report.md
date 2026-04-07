@@ -1,20 +1,20 @@
 ---
 name: Bug report
-about: Caveman speak wrong or break
+about: Soulmate not working as expected
 labels: bug
 ---
 
-**What happen**
-<!-- What caveman do wrong -->
+**What happened**
+<!-- What went wrong -->
 
 **Expected**
-<!-- What caveman should do -->
+<!-- What soulmate should have done -->
 
 **Before/after example**
 ```
 Input: [your prompt]
-Got:   [what caveman said]
-Want:  [what caveman should say]
+Got:   [what soulmate said]
+Want:  [what soulmate should say]
 ```
 
 **Platform**

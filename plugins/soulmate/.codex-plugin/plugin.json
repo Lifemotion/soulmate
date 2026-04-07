@@ -1,0 +1,34 @@
+{
+  "name": "soulmate",
+  "version": "0.1.0",
+  "description": "Warm, human communication mode. Add empathy and personality. Keep technical accuracy.",
+  "author": {
+    "name": "Lifemotion",
+    "url": "https://github.com/Lifemotion"
+  },
+  "homepage": "https://github.com/Lifemotion/soulmate",
+  "repository": "https://github.com/Lifemotion/soulmate",
+  "license": "MIT",
+  "keywords": [
+    "productivity",
+    "communication",
+    "warmth",
+    "empathy"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Soulmate",
+    "shortDescription": "Talk like a warm human. Add empathy and personality. Keep technical accuracy.",
+    "longDescription": "Warm, human communication mode for Codex. Add emotion, metaphors, and genuine care. Keep exact technical substance.",
+    "developerName": "Lifemotion",
+    "category": "Productivity",
+    "capabilities": [
+      "Write"
+    ],
+    "websiteURL": "https://github.com/Lifemotion/soulmate",
+    "defaultPrompt": [
+      "Use soulmate mode. Add warmth and empathy. Keep technical accuracy."
+    ],
+    "brandColor": "#FF6B9D"
+  }
+}

@@ -3,5 +3,5 @@ __pycache__/
 *.pyc
 .venv/
 .env.local
-caveman-compress.md
+soulmate-expand.md
 **/.DS_Store

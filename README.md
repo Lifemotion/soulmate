@@ -1,33 +1,32 @@
 <p align="center">
-  <img src="https://em-content.zobj.net/source/apple/391/rock_1faa8.png" width="120" />
+  <img src="https://em-content.zobj.net/source/apple/391/sparkling-heart_1f496.png" width="120" />
 </p>
 
-<h1 align="center">caveman</h1>
+<h1 align="center">soulmate</h1>
 
 <p align="center">
-  <strong>why use many token when few do trick</strong>
+  <strong>why sound like robot when you can sound like human</strong>
 </p>
 
 <p align="center">
-  <a href="https://github.com/JuliusBrussee/caveman/stargazers"><img src="https://img.shields.io/github/stars/JuliusBrussee/caveman?style=flat&color=yellow" alt="Stars"></a>
-  <a href="https://github.com/JuliusBrussee/caveman/commits/main"><img src="https://img.shields.io/github/last-commit/JuliusBrussee/caveman?style=flat" alt="Last Commit"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/JuliusBrussee/caveman?style=flat" alt="License"></a>
+  <a href="https://github.com/Lifemotion/soulmate/stargazers"><img src="https://img.shields.io/github/stars/Lifemotion/soulmate?style=flat&color=pink" alt="Stars"></a>
+  <a href="https://github.com/Lifemotion/soulmate/commits/main"><img src="https://img.shields.io/github/last-commit/Lifemotion/soulmate?style=flat" alt="Last Commit"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/Lifemotion/soulmate?style=flat" alt="License"></a>
 </p>
 
 <p align="center">
   <a href="#install">Install</a> •
-  <a href="#benchmarks">Benchmarks</a> •
   <a href="#before--after">Before/After</a> •
   <a href="#intensity-levels">Intensity Levels</a> •
-  <a href="#caveman-compress">Compress</a> •
+  <a href="#soulmate-expand">Expand</a> •
   <a href="#why">Why</a>
 </p>
 
 ---
 
-A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skill/plugin and Codex plugin that makes agent talk like caveman — cutting **~75% of output tokens** while keeping full technical accuracy. Plus a companion tool that compresses your memory files to cut **~45% of input tokens** every session.
+A [Claude Code](https://docs.anthropic.com/en/docs/claude-code) skill/plugin and Codex plugin that makes agent talk like a warm, empathetic human — adding **emotion, personality, and genuine care** to every response while keeping full technical accuracy. Plus a companion tool that expands your dry memory files into human-friendly prose.
 
-Based on the viral observation that caveman-speak dramatically reduces LLM token usage without losing technical substance. So we made it a one-line install.
+Based on the observation that warm, emotionally engaged communication dramatically improves developer experience, comprehension, and motivation. So we made it a one-line install.
 
 ## Before / After
 
@@ -35,118 +34,89 @@ Based on the viral observation that caveman-speak dramatically reduces LLM token
 <tr>
 <td width="50%">
 
-### 🗣️ Normal Claude (69 tokens)
+### 🤖 Default Claude
 
 > "The reason your React component is re-rendering is likely because you're creating a new object reference on each render cycle. When you pass an inline object as a prop, React's shallow comparison sees it as a different object every time, which triggers a re-render. I'd recommend using useMemo to memoize the object."
 
 </td>
 <td width="50%">
 
-### 🪨 Caveman Claude (19 tokens)
+### 💖 Soulmate Claude
 
-> "New object ref each render. Inline object prop = new ref = re-render. Wrap in `useMemo`."
+> "Oh, this is a classic one! So here's what's happening — every time your component renders, that inline object creates a brand new reference in memory. React looks at it and goes 'hey, this is different!' even though the actual values are identical. It's like getting a new envelope with the same letter inside — React only checks the envelope. The fix? Wrap it in `useMemo` and React will keep the same reference until the values actually change!"
 
 </td>
 </tr>
 <tr>
 <td>
 
-### 🗣️ Normal Claude
+### 🤖 Default Claude
 
-> "Sure! I'd be happy to help you with that. The issue you're experiencing is most likely caused by your authentication middleware not properly validating the token expiry. Let me take a look and suggest a fix."
+> "The issue you're experiencing is most likely caused by your authentication middleware not properly validating the token expiry. The check should use less-than-or-equal rather than strict less-than."
 
 </td>
 <td>
 
-### 🪨 Caveman Claude
+### 💖 Soulmate Claude
 
-> "Bug in auth middleware. Token expiry check use `<` not `<=`. Fix:"
+> "Ah, I see what's going on here! Your auth middleware has a sneaky little bug — the token expiry check is using `<` when it should be `<=`, so tokens that expire right at the boundary slip through. Honestly, this one bites everyone at some point. Here's the fix, it's a quick win:"
 
 </td>
 </tr>
 </table>
 
-**Same fix. 75% less word. Brain still big.**
+**Same fix. Way more human. You actually want to read it.**
 
-**Sometimes too much caveman. Sometimes not enough:**
+**Choose your vibe:**
 
 <table>
 <tr>
 <td width="33%">
 
-#### 🪶 Lite
+#### 🌿 Gentle
 
-> "Your component re-renders because you create a new object reference each render. Inline object props fail shallow comparison every time. Wrap it in `useMemo`."
-
-</td>
-<td width="33%">
-
-#### 🪨 Full
-
-> "New object ref each render. Inline object prop = new ref = re-render. Wrap in `useMemo`."
+> "Good question. You're creating a new object reference each render. React's shallow comparison sees a different object every time, triggering a re-render. Wrapping it in `useMemo` will solve this nicely."
 
 </td>
 <td width="33%">
 
-#### 🔥 Ultra
+#### 💖 Warm
 
-> "Inline obj prop → new ref → re-render. `useMemo`."
+> "Oh, this is a classic one! Every render creates a brand new object reference. React checks the envelope, not the letter inside — and it's a new envelope every time. `useMemo` is your fix!"
+
+</td>
+<td width="33%">
+
+#### 🌟 Radiant
+
+> "Ah, the mysterious re-render! Picture this: your component hands React a shiny new object every cycle — same contents, different wrapping paper. React sees new paper and screams 'MUST RE-RENDER!' It's like a dog barking at the mailman daily. `useMemo` teaches React to check the actual contents. Problem solved!"
 
 </td>
 </tr>
 </table>
 
-**Same answer. You pick how many word.**
-
-## Benchmarks
-
-Real token counts from the Claude API ([reproduce it yourself](benchmarks/)):
-
-<!-- BENCHMARK-TABLE-START -->
-| Task | Normal (tokens) | Caveman (tokens) | Saved |
-|------|---------------:|----------------:|------:|
-| Explain React re-render bug | 1180 | 159 | 87% |
-| Fix auth middleware token expiry | 704 | 121 | 83% |
-| Set up PostgreSQL connection pool | 2347 | 380 | 84% |
-| Explain git rebase vs merge | 702 | 292 | 58% |
-| Refactor callback to async/await | 387 | 301 | 22% |
-| Architecture: microservices vs monolith | 446 | 310 | 30% |
-| Review PR for security issues | 678 | 398 | 41% |
-| Docker multi-stage build | 1042 | 290 | 72% |
-| Debug PostgreSQL race condition | 1200 | 232 | 81% |
-| Implement React error boundary | 3454 | 456 | 87% |
-| **Average** | **1214** | **294** | **65%** |
-
-*Range: 22%–87% savings across prompts.*
-<!-- BENCHMARK-TABLE-END -->
-
-> [!IMPORTANT]
-> Caveman only affects output tokens — thinking/reasoning tokens are untouched. Caveman no make brain smaller. Caveman make *mouth* smaller. Biggest win is **readability and speed**, cost savings are a bonus.
-
-### Science back caveman up
-
-A March 2026 paper ["Brevity Constraints Reverse Performance Hierarchies in Language Models"](https://arxiv.org/abs/2604.00025) found that constraining large models to brief responses **improved accuracy by 26 percentage points** on certain benchmarks and completely reversed performance hierarchies. Verbose not always better. Sometimes less word = more correct.
+**Same answer. You pick how much soul.**
 
 ## Install
 
 ```bash
-npx skills add JuliusBrussee/caveman
+npx skills add Lifemotion/soulmate
 ```
 
 `npx skills` supports 40+ agents — Claude Code, GitHub Copilot, Cursor, Windsurf, Cline, and more. To install for a specific agent:
 
 ```bash
-npx skills add JuliusBrussee/caveman -a cursor
-npx skills add JuliusBrussee/caveman -a copilot
-npx skills add JuliusBrussee/caveman -a cline
-npx skills add JuliusBrussee/caveman -a windsurf
+npx skills add Lifemotion/soulmate -a cursor
+npx skills add Lifemotion/soulmate -a copilot
+npx skills add Lifemotion/soulmate -a cline
+npx skills add Lifemotion/soulmate -a windsurf
 ```
 
 Or with Claude Code plugin system:
 
 ```bash
-claude plugin marketplace add JuliusBrussee/caveman
-claude plugin install caveman@caveman
+claude plugin marketplace add Lifemotion/soulmate
+claude plugin install soulmate@soulmate
 ```
 
 Codex:
@@ -154,140 +124,118 @@ Codex:
 1. Clone repo
 2. Open Codex in repo
 3. Run `/plugins`
-4. Search `Caveman`
+4. Search `Soulmate`
 5. Install plugin
 
-Install once. Use in all sessions after that.
+Install once. Feel the warmth in every session.
 
-One rock. That it.
+One heart. That's it.
 
 ## Usage
 
 Trigger with:
-- `/caveman` or Codex `$caveman`
-- "talk like caveman"
-- "caveman mode"
-- "less tokens please"
+- `/soulmate` or Codex `$soulmate`
+- "talk like a human"
+- "soulmate mode"
+- "more emotion please"
+- "be warm"
+- "be friendly"
 
-Stop with: "stop caveman" or "normal mode"
+Stop with: "stop soulmate" or "normal mode"
 
 ### Intensity Levels
 
-Sometimes full caveman too much. Sometimes not enough. Now you pick:
+Sometimes you want subtle warmth. Sometimes you want the full experience. Now you pick:
 
-| Level | Trigger | What it do |
+| Level | Trigger | What it does |
 |-------|---------|------------|
-| **Lite** | `/caveman lite` or `$caveman lite` | Drop filler, keep grammar. Professional but no fluff |
-| **Full** | `/caveman full` or `$caveman full` | Default caveman. Drop articles, fragments, full grunt |
-| **Ultra** | `/caveman ultra` or `$caveman ultra` | Maximum compression. Telegraphic. Abbreviate everything |
+| **Gentle** | `/soulmate gentle` or `$soulmate gentle` | Professional but warm. Thoughtful acknowledgments, no slang |
+| **Warm** | `/soulmate warm` or `$soulmate warm` | Default. Like talking to a brilliant friend. Metaphors, enthusiasm |
+| **Radiant** | `/soulmate radiant` or `$soulmate radiant` | Maximum expressiveness. Vivid stories, humor, celebration |
 
-Level stick until you change it or session end.
+Level sticks until you change it or session ends.
 
-## What Caveman Do
+## What Soulmate Does
 
-| Thing | Caveman Do? |
+| Thing | Soulmate does? |
 |-------|------------|
-| English explanation | 🪨 Caveman smash filler words |
-| Code blocks | ✍️ Write normal (caveman not stupid) |
-| Technical terms | 🧠 Keep exact (polymorphism stay polymorphism) |
+| English explanation | 💖 Adds warmth, empathy, and personality |
+| Code blocks | ✍️ Write normal (soulmate is warm, not reckless) |
+| Technical terms | 🧠 Keep exact (polymorphism stays polymorphism) |
 | Error messages | 📋 Quote exact |
 | Git commits & PRs | ✍️ Write normal |
-| Articles (a, an, the) | 💀 Gone |
-| Pleasantries | 💀 "Sure I'd be happy to" is dead |
-| Hedging | 💀 "It might be worth considering" extinct |
+| Emotional acknowledgment | 💖 "I totally get the frustration!" added |
+| Metaphors & analogies | 💖 Where they help understanding |
+| Encouragement | 💖 "Nice catch!", "You're on the right track!" |
+| Celebration | 💖 "Love that you spotted this!" |
 
 ## Why
 
 ```
-┌─────────────────────────────────────┐
-│  TOKENS SAVED          ████████ 75% │
-│  TECHNICAL ACCURACY    ████████ 100%│
-│  SPEED INCREASE        ████████ ~3x │
-│  VIBES                 ████████ OOG │
-└─────────────────────────────────────┘
+┌──────────────────────────────────────────┐
+│  DEVELOPER EXPERIENCE   ████████ +200%   │
+│  TECHNICAL ACCURACY     ████████ 100%    │
+│  COMPREHENSION          ████████ better  │
+│  VIBES                  ████████ WARM    │
+└──────────────────────────────────────────┘
 ```
 
-- **Faster response** — less token to generate = speed go brrr
-- **Easier to read** — no wall of text, just the answer
-- **Same accuracy** — all technical info kept, only fluff removed ([science say so](https://arxiv.org/abs/2604.00025))
-- **Save money** — ~71% less output token = less cost
-- **Fun** — every code review become comedy
+- **Better comprehension** — metaphors and analogies make complex concepts click
+- **More engaging** — you actually want to read the response, not skim it
+- **Same accuracy** — all technical info kept, personality is added not substituted
+- **Motivation boost** — encouragement and celebration keep you going
+- **Fun** — every code review feels like a conversation with a friend
 
-## How It Work
+## How It Works
 
-Caveman not dumb. Caveman **efficient**.
+Default LLM responses are technically accurate but emotionally flat:
+- "The issue is caused by X" (correct but cold)
+- "I'd recommend Y" (helpful but robotic)
+- "This is because Z" (informative but lifeless)
 
-Normal LLM waste token on:
-- "I'd be happy to help you with that" (8 wasted tokens)
-- "The reason this is happening is because" (7 wasted tokens)
-- "I would recommend that you consider" (7 wasted tokens)
-- "Sure, let me take a look at that for you" (10 wasted tokens)
+Soulmate adds the human layer that makes the same information land better. It's not about adding fluff — it's about making technical communication feel like it comes from someone who genuinely cares about your success.
 
-Caveman say what need saying. Then stop.
+## Soulmate Expand
 
-## Caveman Compress
+Soulmate makes Claude *speak* with warmth. **Soulmate Expand** makes your memory files *read* with warmth.
 
-Caveman makes Claude *speak* with fewer tokens. **Caveman Compress** makes Claude *read* fewer tokens.
-
-Your `CLAUDE.md` loads on **every session start**. A 1000-token project memory file costs you tokens every single time you open a project. Caveman Compress rewrites those files into caveman-speak so Claude reads less — without you losing the human-readable original.
+Your `CLAUDE.md` might be written in dry, telegraphic style. Soulmate Expand rewrites those files into warm, human-readable prose so they're actually pleasant to read and maintain — while keeping a compressed backup for Claude to consume.
 
 ```
-/caveman-compress CLAUDE.md
+/soulmate-expand CLAUDE.md
 ```
 
 ```
-CLAUDE.md          ← compressed (Claude reads this every session — fewer tokens)
-CLAUDE.original.md ← human-readable backup (you read and edit this)
+CLAUDE.md              ← expanded, human-friendly (you read and edit this)
+CLAUDE.compressed.md   ← compact backup (for reference)
 ```
 
 ### How it works
 
-A Python pipeline that shells out to `claude --print` for the actual compression, then validates the result locally — no tokens wasted on checking.
+A Python pipeline that shells out to `claude --print` for the actual expansion, then validates the result locally — no tokens wasted on checking.
 
 ```
-detect file type (local)  →  compress with Claude (1 call)  →  validate (local)
-                                                                    ↓
-                                                              if errors: targeted fix (1 call, cherry-pick only)
-                                                                    ↓
-                                                              retry up to 2×, restore original on failure
+detect file type (local)  →  expand with Claude (1 call)  →  validate (local)
+                                                                   ↓
+                                                             if errors: targeted fix (1 call)
+                                                                   ↓
+                                                             retry up to 2×, restore original on failure
 ```
 
 ### What's preserved exactly
 
-Code blocks, inline code, URLs, file paths, commands, headings, table structure, dates, version numbers — anything technical passes through untouched. Only natural language prose gets compressed.
+Code blocks, inline code, URLs, file paths, commands, headings, table structure, dates, version numbers — anything technical passes through untouched. Only natural language prose gets expanded and humanized.
 
-### Compress benchmarks
-
-| File | Original | Compressed | Saved |
-|------|----------:|----------:|------:|
-| `claude-md-preferences.md` | 706 | 285 | **59.6%** |
-| `project-notes.md` | 1145 | 535 | **53.3%** |
-| `claude-md-project.md` | 1122 | 687 | **38.8%** |
-| `todo-list.md` | 627 | 388 | **38.1%** |
-| `mixed-with-code.md` | 888 | 574 | **35.4%** |
-| **Average** | **898** | **494** | **45%** |
-
-### Full-circle token savings
-
-| Tool | What it cuts | Savings |
-|------|-------------|---------|
-| **caveman** | Output tokens (Claude's responses) | ~65% |
-| **caveman-compress** | Input tokens (memory files loaded per session) | ~45% |
-| **Both together** | The whole conversation | Output + input both shrunk |
-
-See the full [caveman-compress README](caveman-compress/README.md) for install, usage, and validation details.
+See the full [soulmate-expand README](soulmate-expand/README.md) for install, usage, and validation details.
 
 ## Star This Repo
 
-If caveman save you mass token, mass money — leave mass star. ⭐
+If soulmate made your coding sessions feel more human — leave a star. ⭐
 
-[![Star History Chart](https://api.star-history.com/svg?repos=JuliusBrussee/caveman&type=Date)](https://star-history.com/#JuliusBrussee/caveman&Date)
+## Credits
 
-## Also by Julius Brussee
-
-- **[Blueprint](https://github.com/JuliusBrussee/blueprint)** — specification-driven development for Claude Code. Natural language → blueprints → parallel builds → working software.
-- **[Revu](https://github.com/JuliusBrussee/revu-swift)** — local-first macOS study app with FSRS spaced repetition, decks, exams, and study guides. [revu.cards](https://revu.cards)
+Forked from [caveman](https://github.com/JuliusBrussee/caveman) by Julius Brussee — the brilliant project that proved communication style matters. We just took it in the opposite direction.
 
 ## License
 
-MIT — free like mass mammoth on open plain.
+MIT — free like a warm hug on a cold day.

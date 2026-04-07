@@ -1,14 +1,14 @@
 {
-  "name": "caveman-repo",
+  "name": "soulmate-repo",
   "interface": {
-    "displayName": "Caveman Repo"
+    "displayName": "Soulmate Repo"
   },
   "plugins": [
     {
-      "name": "caveman",
+      "name": "soulmate",
       "source": {
         "source": "local",
-        "path": "./plugins/caveman"
+        "path": "./plugins/soulmate"
       },
       "policy": {
         "installation": "AVAILABLE",

@@ -55,9 +55,9 @@ def count_bullets(text):
 # ---------- Validators ----------
 
 
-def validate_headings(orig, comp, result):
+def validate_headings(orig, expanded, result):
     h1 = extract_headings(orig)
-    h2 = extract_headings(comp)
+    h2 = extract_headings(expanded)
 
     if len(h1) != len(h2):
         result.add_error(f"Heading count mismatch: {len(h1)} vs {len(h2)}")
@@ -66,57 +66,56 @@ def validate_headings(orig, comp, result):
         result.add_warning("Heading text/order changed")
 
 
-def validate_code_blocks(orig, comp, result):
+def validate_code_blocks(orig, expanded, result):
     c1 = extract_code_blocks(orig)
-    c2 = extract_code_blocks(comp)
+    c2 = extract_code_blocks(expanded)
 
     if c1 != c2:
         result.add_error("Code blocks not preserved exactly")
 
 
-def validate_urls(orig, comp, result):
+def validate_urls(orig, expanded, result):
     u1 = extract_urls(orig)
-    u2 = extract_urls(comp)
+    u2 = extract_urls(expanded)
 
     if u1 != u2:
         result.add_error(f"URL mismatch: lost={u1 - u2}, added={u2 - u1}")
 
 
-def validate_paths(orig, comp, result):
+def validate_paths(orig, expanded, result):
     p1 = extract_paths(orig)
-    p2 = extract_paths(comp)
+    p2 = extract_paths(expanded)
 
     if p1 != p2:
         result.add_warning(f"Path mismatch: lost={p1 - p2}, added={p2 - p1}")
 
 
-def validate_bullets(orig, comp, result):
+def validate_bullets(orig, expanded, result):
     b1 = count_bullets(orig)
-    b2 = count_bullets(comp)
+    b2 = count_bullets(expanded)
 
     if b1 == 0:
         return
 
-    diff = abs(b1 - b2) / b1
-
-    if diff > 0.15:
-        result.add_warning(f"Bullet count changed too much: {b1} -> {b2}")
+    # Expansion may add bullets for clarity, so allow growth but flag large reduction
+    if b2 < b1 * 0.85:
+        result.add_warning(f"Bullet count decreased too much: {b1} -> {b2}")
 
 
 # ---------- Main ----------
 
 
-def validate(original_path: Path, compressed_path: Path) -> ValidationResult:
+def validate(original_path: Path, expanded_path: Path) -> ValidationResult:
     result = ValidationResult()
 
     orig = read_file(original_path)
-    comp = read_file(compressed_path)
+    expanded = read_file(expanded_path)
 
-    validate_headings(orig, comp, result)
-    validate_code_blocks(orig, comp, result)
-    validate_urls(orig, comp, result)
-    validate_paths(orig, comp, result)
-    validate_bullets(orig, comp, result)
+    validate_headings(orig, expanded, result)
+    validate_code_blocks(orig, expanded, result)
+    validate_urls(orig, expanded, result)
+    validate_paths(orig, expanded, result)
+    validate_bullets(orig, expanded, result)
 
     return result
 
@@ -127,13 +126,13 @@ if __name__ == "__main__":
     import sys
 
     if len(sys.argv) != 3:
-        print("Usage: python validate.py <original> <compressed>")
+        print("Usage: python validate.py <original> <expanded>")
         sys.exit(1)
 
     orig = Path(sys.argv[1])
-    comp = Path(sys.argv[2])
+    expanded = Path(sys.argv[2])
 
-    res = validate(orig, comp)
+    res = validate(orig, expanded)
 
     print(f"\nValid: {res.is_valid}")
 

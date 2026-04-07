@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Detect whether a file is natural language (compressible) or code/config (skip)."""
+"""Detect whether a file is natural language (expandable) or code/config (skip)."""
 
 import json
 import re
 from pathlib import Path
 
-# Extensions that are natural language and compressible
-COMPRESSIBLE_EXTENSIONS = {".md", ".txt", ".markdown", ".rst"}
+# Extensions that are natural language and expandable
+EXPANDABLE_EXTENSIONS = {".md", ".txt", ".markdown", ".rst"}
 
 # Extensions that are code/config and should be skipped
 SKIP_EXTENSIONS = {
@@ -68,12 +68,12 @@ def detect_file_type(filepath: Path) -> str:
     ext = filepath.suffix.lower()
 
     # Extension-based classification
-    if ext in COMPRESSIBLE_EXTENSIONS:
+    if ext in EXPANDABLE_EXTENSIONS:
         return "natural_language"
     if ext in SKIP_EXTENSIONS:
         return "code" if ext not in {".json", ".yaml", ".yml", ".toml", ".ini", ".cfg", ".env"} else "config"
 
-    # Extensionless files (like CLAUDE.md, TODO) — check content
+    # Extensionless files — check content
     if not ext:
         try:
             text = filepath.read_text(errors="ignore")
@@ -97,12 +97,12 @@ def detect_file_type(filepath: Path) -> str:
     return "unknown"
 
 
-def should_compress(filepath: Path) -> bool:
-    """Return True if the file is natural language and should be compressed."""
+def should_expand(filepath: Path) -> bool:
+    """Return True if the file is natural language and should be expanded."""
     if not filepath.is_file():
         return False
     # Skip backup files
-    if filepath.name.endswith(".original.md"):
+    if filepath.name.endswith(".compressed.md"):
         return False
     return detect_file_type(filepath) == "natural_language"
 
@@ -117,5 +117,5 @@ if __name__ == "__main__":
     for path_str in sys.argv[1:]:
         p = Path(path_str)
         file_type = detect_file_type(p)
-        compress = should_compress(p)
-        print(f"  {p.name:30s} type={file_type:20s} compress={compress}")
+        expand = should_expand(p)
+        print(f"  {p.name:30s} type={file_type:20s} expand={expand}")

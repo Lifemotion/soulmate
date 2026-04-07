@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - skills/caveman/SKILL.md
+      - skills/soulmate/SKILL.md
 
 concurrency:
   group: sync-skill
@@ -28,16 +28,16 @@ jobs:
 
       - name: Copy to duplicate locations
         run: |
-          cp skills/caveman/SKILL.md caveman/SKILL.md
-          cp skills/caveman/SKILL.md plugins/caveman/skills/caveman/SKILL.md
+          cp skills/soulmate/SKILL.md soulmate/SKILL.md
+          cp skills/soulmate/SKILL.md plugins/soulmate/skills/soulmate/SKILL.md
 
-      - name: Rebuild caveman.skill ZIP
+      - name: Rebuild soulmate.skill ZIP
         run: |
-          cd skills && zip -r ../caveman.skill caveman/
+          cd skills && zip -r ../soulmate.skill soulmate/
 
       - name: Commit and push if changed
         run: |
           git diff --quiet && exit 0
-          git add caveman/SKILL.md plugins/caveman/skills/caveman/SKILL.md caveman.skill
-          git commit -m "chore: sync SKILL.md copies and caveman.skill [skip ci]"
+          git add soulmate/SKILL.md plugins/soulmate/skills/soulmate/SKILL.md soulmate.skill
+          git commit -m "chore: sync SKILL.md copies and soulmate.skill [skip ci]"
           git push
