@@ -20,9 +20,7 @@
   --accent-secondary: #C084FC;
   --accent-glow: rgba(255, 107, 157, 0.15);
 
-  --diff-added: rgba(255, 107, 157, 0.15);
   --diff-added-text: #FF8FB8;
-  --diff-kept: rgba(255, 255, 255, 0.05);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -117,25 +115,31 @@ body {
 }
 .cli-btn:active { transform: scale(0.96); }
 
-.diff-container { margin-top: 4rem; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-.diff-header {
-  display: flex; justify-content: space-between; padding: 12px 20px;
-  border-bottom: 1px solid var(--border); background: rgba(10,10,10,0.8);
-  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary);
+.compare-grid {
+  margin-top: 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
 }
-.diff-body { padding: 32px; font-size: 1.05rem; line-height: 1.8; font-weight: 300; color: var(--text-secondary); }
-.diff-added {
-  color: var(--diff-added-text); background: var(--diff-added);
-  padding: 2px 4px; border-radius: 3px;
+@media (max-width: 800px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-col { background: rgba(5,5,10,0.9); padding: 32px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+.compare-label {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; text-transform: uppercase;
+  letter-spacing: 0.1em; margin-bottom: 1.5rem; display: block;
 }
-.diff-keep { color: var(--text-primary); font-weight: 400; }
-.diff-toggle { margin-top: 1rem; display: flex; gap: 1rem; justify-content: flex-end; padding: 0 20px 20px; }
-.toggle-btn {
-  background: none; border: 1px solid var(--border); color: var(--text-secondary);
-  padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; cursor: pointer;
-  font-family: 'JetBrains Mono', monospace; transition: all 0.2s;
+.compare-label-normal { color: var(--text-tertiary); }
+.compare-label-soulmate { color: var(--accent); }
+.compare-text { font-size: 1rem; line-height: 1.8; font-weight: 300; color: var(--text-secondary); }
+.compare-text em { color: var(--text-tertiary); font-style: italic; }
+.compare-col-soulmate .compare-text { color: var(--diff-added-text); }
+.compare-prompt {
+  margin-top: 4rem; margin-bottom: 1.5rem; padding: 12px 20px;
+  border: 1px solid var(--border); border-radius: 8px; background: rgba(10,10,10,0.8);
+  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-secondary);
 }
-.toggle-btn.active { background: linear-gradient(135deg, var(--accent), var(--accent-secondary)); color: #fff; border-color: transparent; }
+.compare-prompt span { color: var(--accent); }
+.compare-tokens {
+  margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
 
 .bento-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
@@ -211,20 +215,19 @@ body {
 
 <section class="section container reveal">
   <span class="section-badge">01 // Transformation</span>
-  <h2 class="section-title">The Warmth Diff</h2>
-  <p class="section-desc">See exactly what soulmate adds. Technical substance stays intact; warmth, empathy, and personality are layered on top.</p>
+  <h2 class="section-title">Same Answer. More Soul.</h2>
+  <p class="section-desc">Same bug identified, same fix suggested. One feels like documentation, the other feels like a friend who's been there.</p>
 
-  <div class="diff-container">
-    <div class="diff-header">
-      <span>Payload: React Re-render Diagnosis</span>
-      <span style="color: var(--text-primary);">Cold &rarr; Warm</span>
+  <div class="compare-prompt"><span>&gt;</span> My Express auth middleware is letting expired JWT tokens through. The expiry check uses Date.now() compared to the token's exp field. What's wrong?</div>
+
+  <div class="compare-grid">
+    <div class="compare-col">
+      <span class="compare-label compare-label-normal">Default &mdash; 989 tokens</span>
+      <div class="compare-text">The issue is likely a <strong>timestamp format mismatch</strong>. JWT <code>exp</code> claims use <strong>Unix timestamps in seconds</strong>, while <code>Date.now()</code> returns <strong>milliseconds</strong>. This means your expired tokens appear valid because you're comparing different time units.<br><br><em>...then 4 code blocks, 2 alternative approaches, a testing section, and a key takeaway paragraph.</em></div>
     </div>
-    <div class="diff-body" id="diffBody">
-      <span class="diff-added">Oh, this is a classic one! So here's what's happening &mdash;</span> <span class="diff-keep">every time your component renders, that inline object creates a brand new reference</span><span class="diff-added"> in memory. React looks at it and goes 'hey, this is different!' even though the actual values are identical. It's like getting a new envelope with the same letter inside &mdash; React only checks the envelope.</span> <span class="diff-keep">The fix?</span> <span class="diff-keep">Wrap it in <code>useMemo</code></span> <span class="diff-added">and React will keep the same reference until the values actually change!</span>
-    </div>
-    <div class="diff-toggle">
-      <button class="toggle-btn active" onclick="setDiffMode('diff', this)">View Diff</button>
-      <button class="toggle-btn" onclick="setDiffMode('soulmate', this)">Full Output</button>
+    <div class="compare-col compare-col-soulmate">
+      <span class="compare-label compare-label-soulmate">Soulmate &mdash; 668 tokens</span>
+      <div class="compare-text">Oh, this is a sneaky one that trips up so many developers! Here's what's happening: <strong>JWT expiry times are in seconds since Unix epoch, but <code>Date.now()</code> returns milliseconds</strong>. So you're comparing apples to oranges!<br><br>Think of it like this &mdash; your token says "I expire at second 1,700,000,000" but <code>Date.now()</code> is shouting "It's millisecond 1,700,000,000,000 right now!" Your middleware looks at those numbers and goes "Well, this token must be super fresh!"<br><br><em>...then the fix, a complete middleware example, and a pro tip &mdash; all in 32% fewer tokens.</em></div>
     </div>
   </div>
 </section>
@@ -312,17 +315,6 @@ function copyInstall(btn) {
   setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
 }
 
-function setDiffMode(mode, btn) {
-  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const body = document.getElementById('diffBody');
-
-  if (mode === 'diff') {
-    body.innerHTML = `<span class="diff-added">Oh, this is a classic one! So here's what's happening &mdash;</span> <span class="diff-keep">every time your component renders, that inline object creates a brand new reference</span><span class="diff-added"> in memory. React looks at it and goes 'hey, this is different!' even though the actual values are identical. It's like getting a new envelope with the same letter inside &mdash; React only checks the envelope.</span> <span class="diff-keep">The fix?</span> <span class="diff-keep">Wrap it in <code>useMemo</code></span> <span class="diff-added">and React will keep the same reference until the values actually change!</span>`;
-  } else {
-    body.innerHTML = `<span class="diff-keep">Oh, this is a classic one! So here's what's happening &mdash; every time your component renders, that inline object creates a brand new reference in memory. React looks at it and goes 'hey, this is different!' even though the actual values are identical. It's like getting a new envelope with the same letter inside &mdash; React only checks the envelope. The fix? Wrap it in <code>useMemo</code> and React will keep the same reference until the values actually change!</span>`;
-  }
-}
 
 const cliInput = document.getElementById('cli-input');
 const termBody = document.getElementById('termBody');
