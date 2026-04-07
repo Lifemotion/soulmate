@@ -192,6 +192,48 @@ Level sticks until you change it or session ends.
 - **Same accuracy** — all technical info kept, personality is added not substituted
 - **Motivation boost** — encouragement and celebration keep you going
 - **Fun** — every code review feels like a conversation with a friend
+- **More focused** — soulmate answers are consistently shorter and more to the point
+
+## Benchmarks
+
+Soulmate doesn't cost you extra tokens. In fact, it produces **shorter, more focused** responses — same technical substance, less filler.
+
+| Task | Normal (tokens) | Soulmate (tokens) | Difference |
+|------|---------------:|----------------:|------:|
+| Explain React re-render bug | 1693 | 775 | -54% |
+| Fix auth middleware token expiry | 989 | 668 | -32% |
+| Set up PostgreSQL connection pool | 2873 | 1867 | -35% |
+| Explain git rebase vs merge | 1117 | 955 | -15% |
+| Refactor callback to async/await | 1145 | 594 | -48% |
+| Architecture: microservices vs monolith | 1880 | 1159 | -38% |
+| Review PR for security issues | 1440 | 724 | -50% |
+| Docker multi-stage build | 1346 | 864 | -36% |
+| Debug PostgreSQL race condition | 2721 | 869 | -68% |
+| Implement React error boundary | 3428 | 2347 | -32% |
+| **Average** | **1863** | **1082** | **-41%** |
+
+*Model: Claude Sonnet 4, 3 trials per prompt, median tokens. [Run your own](benchmarks/).*
+
+<details>
+<summary>Example: "My Express auth middleware is letting expired JWT tokens through"</summary>
+
+### 🤖 Normal (989 tokens)
+
+> The issue is likely a **timestamp format mismatch**. JWT `exp` claims use **Unix timestamps in seconds**, while `Date.now()` returns **milliseconds**.
+>
+> *...then 4 code blocks, 2 alternative approaches, a testing section, and a key takeaway paragraph.*
+
+### 💖 Soulmate (668 tokens)
+
+> Oh, this is a sneaky one that trips up so many developers! Here's what's happening: **JWT expiry times are in seconds since Unix epoch, but `Date.now()` returns milliseconds**. So you're comparing apples to oranges!
+>
+> Think of it like this — your token says "I expire at second 1,700,000,000" but `Date.now()` is shouting "It's millisecond 1,700,000,000,000 right now!" Your middleware looks at those numbers and goes "Well, this token must be super fresh!"
+>
+> *...then the fix, a complete middleware example, and a pro tip — all in 30% fewer tokens.*
+
+**Same bug identified. Same fix. Way more human. And shorter.**
+
+</details>
 
 ## How It Works
 

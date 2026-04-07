@@ -30,7 +30,10 @@ SKILL_PATH = REPO_DIR / "skills" / "soulmate" / "SKILL.md"
 README_PATH = REPO_DIR / "README.md"
 RESULTS_DIR = SCRIPT_DIR / "results"
 
-NORMAL_SYSTEM = "You are a helpful assistant."
+NORMAL_SYSTEM = (
+    "You are a helpful assistant. Give thorough, well-structured answers. "
+    "Include code examples where relevant. Use markdown formatting."
+)
 BENCHMARK_START = "<!-- BENCHMARK-TABLE-START -->"
 BENCHMARK_END = "<!-- BENCHMARK-TABLE-END -->"
 
@@ -42,7 +45,12 @@ def load_prompts():
 
 
 def load_soulmate_system():
-    return SKILL_PATH.read_text()
+    skill = SKILL_PATH.read_text()
+    return (
+        skill + "\n\n"
+        "Give thorough, well-structured answers. "
+        "Include code examples where relevant. Use markdown formatting."
+    )
 
 
 def sha256_file(path):
