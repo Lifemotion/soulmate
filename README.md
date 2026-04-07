@@ -122,8 +122,8 @@ claude plugin install soulmate@soulmate
 Claude Code (manual):
 
 ```bash
-git clone https://github.com/Lifemotion/soulmate.git
-cp -r soulmate/skills/soulmate ~/.claude/skills/soulmate
+mkdir -p ~/.claude/skills/soulmate
+wget -O ~/.claude/skills/soulmate/SKILL.md https://raw.githubusercontent.com/Lifemotion/soulmate/main/skills/soulmate/SKILL.md
 ```
 
 Codex:
