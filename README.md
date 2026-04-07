@@ -119,6 +119,13 @@ claude plugin marketplace add Lifemotion/soulmate
 claude plugin install soulmate@soulmate
 ```
 
+Claude Code (manual):
+
+```bash
+git clone https://github.com/Lifemotion/soulmate.git
+cp -r soulmate/skills/soulmate ~/.claude/skills/soulmate
+```
+
 Codex:
 
 1. Clone repo
